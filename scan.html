@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Página Principal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#000"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<!-- reuse same icon for Safari -->
+	<link rel="apple-touch-icon" href="/favicon.ico">
+
+	<!-- CSS -->
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/scan.css">
+
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="js/rgb2lab.js"></script>
+
+	<script type="text/javascript" src="js/rgb2hex.js"></script>
+
+	<script type="text/javascript" src="js/app.js"></script>
+
+	<script type="text/javascript" src="js/color-thief.js"></script>
+
+
+	
+	<script>
+		var minDelta = 999999
+		var scale = [
+		    [[118,90,59],"95"],
+		    [[106,73,36],"85"],
+		    [[102,68,37],"75"],
+		    [[94,60,35],"65"],
+		    [[80,48,31],"55"],
+		    [[59,40,31],"45"],
+		    [[40,25,18],"35"],
+		    [[40,27,26],"25"]
+		];
+		$(document).ready(function() {
+		  	$("#imagen").on("change", function() {
+		    	if(typeof(FileReader) != undefined){
+		      		var image = new Image();
+		      		var reader = new FileReader();
+					reader.onload = function(e){
+			  			image.src = e.target.result;
+			  			document.body.appendChild(image);
+			  			image.style.display = "none";
+					}
+					reader.onloadend = function() {
+						var colorThief = new ColorThief();
+								// Display main color
+								// e.g [125, 189, 193]
+						var result = colorThief.getColor(image);
+						var resultLab = rgb2lab(result);
+						$("#hide").removeAttr("style", "visibility");
+						$("#box").css("background-color", rgbToHex(result));
+						for (i = 0; i < scale.length; i++) {
+							var cercania = deltaE(resultLab, rgb2lab(scale[i][0]))
+							if(cercania<minDelta){
+							   	minDelta=cercania
+								color = i
+							   	tostado = scale[i][1]
+							}
+						}
+						
+						if(tostado!=null){
+							var escala = $("#scale").css("background-color", rgbToHex(scale[color][0]));
+							var nivTostado = $("#actual").text("Nivel de Tostado Agtron: "+tostado);
+							var restante = $("#restante").text("Tostado restante: "+ Math.round(minDelta));
+							var devolver = {
+								escala: escala,
+							    nivTostado: nivTostado,
+							    restante: restante
+							}
+						}
+						minDelta = 999999;
+						color = 0;
+						tostado =""
+					}
+		      	reader.readAsDataURL($(this)[0].files[0]);
+		    }else{
+		      console.log("Formato desconocido");
+		    }
+		  });
+		});
+				
+	</script>
+
+</head>
+<body>
+
+	<section id="home">
+		<header class="masthead">
+		  	<div class="container h-100">
+		    	<div class="row h-100 align-items-center">
+		      		<div class="col-12 text-center">
+						<label class="btn btn-danger col-sm-4 mt-4">
+						    Analizar Tostado <input type="file" id="imagen" name="imagen" required="" style="display: none;">
+						</label>
+							<div class="card caja mt-4" id="hide" align="center" style="visibility: hidden;">
+							  	<div class="card-body">
+							  		<div class="row">
+								    	<div class="col-sm-12 col-lg-6 mb-4">
+											<h4>Tostado Actual:</h4>
+											<div id="box" style="width: 100px; height: 100px; border-radius: 50%;">
+												<img class="mt-2" src="img/bean.png" style="width: 80px; height: 80px;">
+												
+											</div>
+										</div>
+										<div class="col-sm-12 col-lg-6 mb-4">
+											<h4 id="actual"></h4>
+									   		<div id="scale" style="background-color: red; width: 100px; height: 100px; border-radius: 50%;">
+									   			<img class="mt-2" src="img/bean.png" style="width: 80px; height: 80px;">
+								  			</div>
+								  		</div>
+							  		</div>
+								  	<div class="row">
+								  		<div class="col-sm-12" >
+								  			<h5 id="restante"></h5>
+								  		</div>
+								  	</div>
+							  </div>
+							</div>
+		      			</div>
+		    		</div>
+		  	</div>
+		</header>
+		
+	</section>
+
+	
+</body>
+</html>

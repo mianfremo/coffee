@@ -1,0 +1,12 @@
+.masthead {
+  height: 120vh;
+  min-height: 500px;
+  background-image: url('../img/Fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.caja{
+	background-color: rgba(256,256,256,0.5);
+}

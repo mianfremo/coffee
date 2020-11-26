@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Página Principal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#000"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<!-- reuse same icon for Safari -->
+	<link rel="apple-touch-icon" href="/favicon.ico">
+
+	<!-- CSS -->
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		function go(){
+			var route = document.getElementById("select").value;
+			window.location = route;
+		}
+	</script>
+
+
+</head>
+<body>
+	<div>
+		<div class="centrar">
+			<form style="width: 50vh;">
+				<select class="form-control" id="select" onchange="go()">
+					<option value="index.html">Seleccione una Opción</option>
+				  	<option value="scan.html">Escáner de Tostado</option>
+				  	<option value="assistant.html">Asistente de Brew</option>
+				</select>
+			</form>
+		</div>
+	</div>
+		
+</body>
+<script>
+	if('serviceWorker' in navigator) {
+	  navigator.serviceWorker
+	           .register('/sw.js')
+	           .then(function() { console.log("Service Worker Registered"); });
+	}
+</script>
+</html>

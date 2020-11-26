@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Asistente</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="theme-color" content="#000"/>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<!-- reuse same icon for Safari -->
+	<link rel="apple-touch-icon" href="/favicon.ico">
+
+	<!-- CSS -->
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/assistant.css">
+
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		
+		function asistente(){
+			var gramos = document.getElementById("gramos").value;
+			var ratio = document.getElementById("ratio").value;
+			var bypass = document.getElementById("bypass").value;
+			var agua = gramos*ratio;
+			
+			var resultado = (gramos*bypass)-agua;
+
+			document.getElementById("r_agua").innerHTML = "Agua para Brew: "+String(agua)
+			document.getElementById("r_bypass").innerHTML = "Agua para Bypass: "+String(resultado);
+
+			document.getElementById("resultados").style.display = "block";
+
+		}
+	</script>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="centrar ">
+			<form class="card" style="width: 50vh; background-color: rgba(255,255,255,0.8);">
+				<div class="card-body ">
+				  	<div class="form-group">
+				    	<label for="gramos">Gramos de café</label> 
+			      		<input type="text" class="form-control" id="gramos">
+				    
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="ratio">Ratio</label>
+			 			<input type="text" class="form-control" id="ratio">
+				  	</div>
+					<div class="form-group">
+					    <label for="bypass">Ratio de Bypass</label>
+						<input type="text" class="form-control" id="bypass">
+					 </div>
+				  
+				  	<div class="form-group row">
+				    	<div class="col-sm-12">
+				      		<button type="button" onclick="asistente()" class="btn btn-danger col-sm-12">Enviar</button>
+				    	</div>
+				  	</div>
+				
+					<div>
+						<div class="card" id="resultados" style="display: none;">
+						  	<div class="card-header bg-danger text-light text-center">
+							    <h5 class="card-title">Resultados</h5>
+							</div>
+							<ul class="list-group list-group-flush">
+							    <li class="list-group-item" id="r_agua"></li>
+							    <li class="list-group-item" id="r_bypass"></li>
+						    </ul>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

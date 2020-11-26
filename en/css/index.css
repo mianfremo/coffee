@@ -1,0 +1,38 @@
+#home{
+  background-image: url(../img/bg-home.jpg);
+}
+
+.navbar{
+  background-color: rgba(0,0,0,0.8);
+}
+
+#properties{
+  margin-top: 20px;
+  background: ;
+}
+
+#contact{
+  background: url(../img/banner.jpg);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.card-contact{
+  background-color: rgba(256,256,256,0.8);
+}
+
+#main{
+  padding-top: 160px;
+  padding-bottom: 120px;
+}
+
+#github{
+  margin-top: 40px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+#text{
+  background-color: rgba(0,0,0,0);
+}
+
